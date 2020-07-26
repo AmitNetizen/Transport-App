@@ -16,7 +16,7 @@ function Container() {
         </Switch>
       </BrowserRouter>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
