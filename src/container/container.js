@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Header from '../component/Header';
 import Footer from '../component/Footer';
-import LandingPage from '../pages/landingPage';
+import LandingPage from '../pages/LandingPage/landingPage';
 
 function Container() {
   return (

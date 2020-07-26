@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Form from '../component/Form';
-import TripSection from '../component/TripSection';
+import Form from '../../component/Form';
+import TripSection from '../../component/TripSection';
 
 import './landingPage.css';
 
