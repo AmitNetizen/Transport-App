@@ -4,18 +4,20 @@ import vehicles from '../../../constants/vehicleType';
 
 import './index.css';
 
-function Select({ label, name, selectHandle }) {
-  console.log(vehicles, 'vehicles:::vehicles');
+function Select({ label, name, value, selectHandle, disabled }) {
   return (
     <>
       <label>
         {label}:
         <select
           name={name}
-          //   value={vehicle}
+          value={value}
           onChange={(e) => selectHandle(e.target.value)}
           required
         >
+          <option key="" disabled={disabled}>
+            None
+          </option>
           {vehicles.map((vehicle) => (
             <option key={vehicle.id}>{vehicle.type}</option>
           ))}

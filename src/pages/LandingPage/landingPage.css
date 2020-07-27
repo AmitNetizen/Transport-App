@@ -1,3 +1,8 @@
-.schedule-form {
-  /* text-align: center; */
+.filter-section {
+  text-align: right;
+}
+
+.filter-section label {
+  width: 20%;
+  margin-right: 40px;
 }

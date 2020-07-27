@@ -3,28 +3,47 @@ import React, { useState } from 'react';
 import Input from '../shared/Input';
 import Select from '../shared/Select';
 import Button from '../shared/Button';
+import CustomTimePicker from '../shared/CustomTimePicker';
 
 import './index.css';
 
-function Form() {
+function Form(props) {
   const [empId, setEmpId] = useState('');
-  const [vehicleType, setVehicleType] = useState('');
+  const [vehicleType, setVehicleType] = useState('Car');
   const [vehicleNumber, setVehicleNumber] = useState('');
   const [vacantSeat, setVacantSeat] = useState('');
   const [pickupPoint, setPickupPoint] = useState('');
   const [destination, setDestination] = useState('');
+  const [startTime, setStartTime] = useState('3600');
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const pickupTime = getTime(startTime);
+    const tripId = `${pickupPoint}-${vehicleType}-${destination}`;
     const dataToSend = {
+      tripId,
       empId,
       vehicleType,
       vehicleNumber,
       vacantSeat,
       pickupPoint,
       destination,
+      pickupTime,
     };
-    console.log(dataToSend, 'event::event');
+    setEmpId('');
+    setVehicleType('Car');
+    setVehicleNumber('');
+    setVacantSeat('');
+    setPickupPoint('');
+    setDestination('');
+    props.submitHandle(dataToSend);
+  };
+
+  const getTime = (time) => {
+    var date = new Date(null);
+    date.setSeconds(time);
+    var result = date.toISOString().substr(11, 8);
+    return result;
   };
 
   return (
@@ -44,6 +63,8 @@ function Form() {
             <Select
               label="Vehicle Type"
               name="vehicleType"
+              value={vehicleType}
+              disabled={true}
               selectHandle={setVehicleType}
             />
           </div>
@@ -77,6 +98,13 @@ function Form() {
               name="destination"
               type="text"
               inputHandle={setDestination}
+            />
+          </div>
+          <div className="col-md-3">
+            <CustomTimePicker
+              label="Start Time"
+              value={startTime}
+              timeHandle={setStartTime}
             />
           </div>
           <div className="col-md-3">
