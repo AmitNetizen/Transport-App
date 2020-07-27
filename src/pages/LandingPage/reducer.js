@@ -10,7 +10,7 @@ const initialState = {
       vacantSeat: 1,
       pickupPoint: 'BTM',
       destination: 'Koromangala',
-      pickupTime: '11:11 PM',
+      pickupTime: '23:11:00',
     },
     {
       tripId: 'BTM-CAR-INDIRANAGAR',
@@ -20,7 +20,7 @@ const initialState = {
       vacantSeat: 1,
       pickupPoint: 'BTM',
       destination: 'Indira Nagar',
-      pickupTime: '11:11 PM',
+      pickupTime: '23:11:00',
     },
   ],
   bookedtrip: [],

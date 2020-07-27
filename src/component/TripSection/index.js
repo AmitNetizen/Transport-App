@@ -5,10 +5,12 @@ import PickupSection from '../PickupSection';
 
 import './index.css';
 function TripSection({ trips, filter, booktrip }) {
+  const today = new Date();
+  const currentTime = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
   const tripData =
     filter === 'Bike' || filter === 'Car'
       ? trips.filter((trip) => trip.vehicleType === filter)
-      : trips;
+      : trips.filter((trip) => trip.pickupTime > currentTime);
 
   return (
     <div className="row">
