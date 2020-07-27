@@ -1,4 +1,4 @@
-import { TRIP } from './../../store/types';
+import { TRIP, BOOK_TRIP } from './../../store/types';
 
 const initialState = {
   tripData: [
@@ -23,6 +23,7 @@ const initialState = {
       pickupTime: '11:11 PM',
     },
   ],
+  bookedtrip: [],
 };
 
 export default function tripReducer(state = initialState, action) {
@@ -33,6 +34,15 @@ export default function tripReducer(state = initialState, action) {
         tripData: [...state.tripData, action.payload.data],
       };
     case TRIP.TRIP_REQUEST:
+      return {
+        ...state,
+      };
+    case BOOK_TRIP.BOOK_TRIP_SUCCESS:
+      return {
+        ...state,
+        bookedtrip: [...state.bookedtrip, action.payload.data],
+      };
+    case BOOK_TRIP.BOOK_TRIP_REQUEST:
       return {
         ...state,
       };

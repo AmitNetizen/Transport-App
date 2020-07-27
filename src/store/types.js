@@ -11,3 +11,4 @@ function createRequestTypes(type) {
 }
 
 export const TRIP = createRequestTypes('TRIP');
+export const BOOK_TRIP = createRequestTypes('BOOK_TRIP');

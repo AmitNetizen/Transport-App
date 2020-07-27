@@ -1,16 +1,16 @@
 import React from 'react';
 import './index.css';
 
-function Input({ label, name, type, inputHandle }) {
+function Input({ label, name, type, inputHandle, placeholder }) {
   return (
     <div>
       <label>
-        {label}:
+        {label ? `${label} :` : ''}
         <input
           name={name}
           type={type}
-          //   value={email}
           onChange={(e) => inputHandle(e.target.value)}
+          placeholder={placeholder}
           required
         />
       </label>

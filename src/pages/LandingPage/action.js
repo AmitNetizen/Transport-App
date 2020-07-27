@@ -1,7 +1,11 @@
-import { TRIP } from '../../store/types';
+import { TRIP, BOOK_TRIP } from '../../store/types';
 
 const tripRequest = () => ({
   type: TRIP.TRIP_REQUEST,
+});
+
+const tripBookRequest = () => ({
+  type: BOOK_TRIP.BOOK_TRIP_REQUEST,
 });
 
 const tripRequestSuccess = (data) => ({
@@ -18,4 +22,18 @@ const createTrip = (data) => (dispatch) => {
   }
 };
 
-export { createTrip };
+const tripBookSuccess = (data) => ({
+  type: BOOK_TRIP.BOOK_TRIP_SUCCESS,
+  payload: {
+    data: data,
+  },
+});
+
+const bookTrip = (data) => (dispatch) => {
+  dispatch(tripBookRequest());
+  if (data) {
+    dispatch(tripBookSuccess(data));
+  }
+};
+
+export { createTrip, bookTrip };

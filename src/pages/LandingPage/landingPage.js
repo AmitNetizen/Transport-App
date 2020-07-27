@@ -8,7 +8,7 @@ import TripSection from '../../component/TripSection';
 import Select from '../../component/shared/Select';
 
 import './landingPage.css';
-import { createTrip } from './action';
+import { createTrip, bookTrip } from './action';
 class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +26,12 @@ class LandingPage extends Component {
     this.setState({ filter: e });
   };
 
+  onBookTrip = (event) => {
+    // event.preventDefault();
+    console.log('onbooktrip', event);
+    this.props.bookTrip(event);
+  };
+
   render() {
     return (
       <div className="schedule-form">
@@ -38,21 +44,24 @@ class LandingPage extends Component {
             selectHandle={(e) => this.handleSelect(e)}
           />
         </div>
-        <TripSection trips={this.props.trips} filter={this.state.filter} />
+        <TripSection
+          trips={this.props.trips}
+          booktrip={this.onBookTrip}
+          filter={this.state.filter}
+        />
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log(state, 'state');
   return {
     trips: state.trips.tripData,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ createTrip }, dispatch);
+  return bindActionCreators({ createTrip, bookTrip }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

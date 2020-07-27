@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Button from '../Button';
-
 import './index.css';
 
 function Card({ trip }) {
@@ -37,7 +35,7 @@ function Card({ trip }) {
               <span>{trip.pickupTime}</span>
             </div>
             <div className="labels">
-              <Button />
+              EMP ID : <span>{trip.empId}</span>
             </div>
           </div>
         </div>

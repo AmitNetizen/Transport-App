@@ -1,10 +1,10 @@
 import React from 'react';
 
 import './index.css';
-function Button() {
+function Button({ name }) {
   return (
     <>
-      <button>Schedule</button>
+      <button>{name}</button>
     </>
   );
 }

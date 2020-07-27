@@ -48,7 +48,7 @@ function Form(props) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="schedule-form" onSubmit={handleSubmit}>
         <h1>Schedule</h1>
         <div className="row">
           <div className="col-md-3">
@@ -108,7 +108,7 @@ function Form(props) {
             />
           </div>
           <div className="col-md-3">
-            <Button />
+            <Button name="Schedule" />
           </div>
         </div>
       </form>
