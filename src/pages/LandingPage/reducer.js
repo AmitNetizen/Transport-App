@@ -24,9 +24,14 @@ const initialState = {
     },
   ],
   bookedtrip: [],
+  error: {
+    message: '',
+    showError: false,
+  },
 };
 
 export default function tripReducer(state = initialState, action) {
+  console.log(action, 'action::action');
   switch (action.type) {
     case TRIP.TRIP_SUCCESS:
       return {
@@ -45,6 +50,15 @@ export default function tripReducer(state = initialState, action) {
     case BOOK_TRIP.BOOK_TRIP_REQUEST:
       return {
         ...state,
+      };
+    case BOOK_TRIP.BOOK_TRIP_FAILED:
+      return {
+        ...state,
+        error: {
+          ...state.error,
+          message: action.payload.data.message,
+          showError: action.payload.data.showError,
+        },
       };
     default:
       return state;

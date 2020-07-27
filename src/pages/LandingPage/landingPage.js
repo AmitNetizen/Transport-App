@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import Form from '../../component/Form';
 import TripSection from '../../component/TripSection';
 import Select from '../../component/shared/Select';
+import ErrorSection from '../../component/shared/ErrorSection';
 
 import './landingPage.css';
 import { createTrip, bookTrip } from './action';
@@ -27,15 +28,17 @@ class LandingPage extends Component {
   };
 
   onBookTrip = (event) => {
-    // event.preventDefault();
-    console.log('onbooktrip', event);
-    this.props.bookTrip(event);
+    this.props.bookTrip(event, this.props.bookedtrip, this.props.trips);
   };
 
   render() {
+    const { showError } = this.props.error;
     return (
       <div className="schedule-form">
         <Form submitHandle={this.submitFrom} />
+        {showError ? (
+          <ErrorSection errorMsg={this.props.error.message} />
+        ) : null}
         <div className="filter-section">
           <Select
             label="Vehicle Type"
@@ -44,6 +47,7 @@ class LandingPage extends Component {
             selectHandle={(e) => this.handleSelect(e)}
           />
         </div>
+
         <TripSection
           trips={this.props.trips}
           booktrip={this.onBookTrip}
@@ -55,8 +59,11 @@ class LandingPage extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state, 'state::state');
   return {
     trips: state.trips.tripData,
+    bookedtrip: state.trips.bookedtrip,
+    error: state.trips.error,
   };
 };
 

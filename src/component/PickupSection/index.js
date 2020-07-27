@@ -10,6 +10,7 @@ function PickupSection({ trip, booktrip }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    trip['pickupEmpId'] = empId;
     booktrip(trip);
   };
 
