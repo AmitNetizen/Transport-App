@@ -31,7 +31,7 @@ const initialState = {
 };
 
 export default function tripReducer(state = initialState, action) {
-  console.log(action, 'action::action');
+  console.log(action, 'action');
   switch (action.type) {
     case TRIP.TRIP_SUCCESS:
       return {
@@ -45,6 +45,13 @@ export default function tripReducer(state = initialState, action) {
     case BOOK_TRIP.BOOK_TRIP_SUCCESS:
       return {
         ...state,
+        tripData: state.tripData.map((trip) => {
+          console.log(trip, 'trip::trip');
+          if (trip.pickupEmpId === action.payload.data.pickupEmpId) {
+            trip.vacantSeat = trip.vacantSeat - 1;
+          }
+          return trip;
+        }),
         bookedtrip: [...state.bookedtrip, action.payload.data],
       };
     case BOOK_TRIP.BOOK_TRIP_REQUEST:

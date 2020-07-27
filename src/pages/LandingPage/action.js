@@ -36,35 +36,11 @@ const tripBookErrorStatus = (data) => ({
   },
 });
 
-const checkForbookedTrip = (data, bookedtrip, trips, dispatch) => {
-  const isPresentInBookedTrip = bookedtrip.some(
-    (trip) => trip.pickupEmpId === data.pickupEmpId
-  );
-  const isPresentInOtherTrip = trips.some(
-    (trip) => trip.pickupEmpId === data.pickupEmpId
-  );
-
-  if (isPresentInBookedTrip) {
-    dispatch(
-      tripBookErrorStatus({
-        showError: true,
-        message: 'You have already book the trip',
-      })
-    );
-  } else if (isPresentInOtherTrip) {
-    dispatch(
-      tripBookErrorStatus({
-        showError: true,
-        message:
-          'You are not allowed to book a trip as you already have created a  trip on you EMP Id',
-      })
-    );
-  }
-
-  return isPresentInBookedTrip || isPresentInOtherTrip ? true : false;
+const checkForbookedTrip = (data, bookedtrip) => {
+  return bookedtrip.some((trip) => trip.pickupEmpId === data.pickupEmpId);
 };
 
-const bookTrip = (data, bookedtrip, trips) => (dispatch) => {
+const bookTrip = (data, bookedtrip) => (dispatch) => {
   dispatch(tripBookRequest());
   const { empId, pickupEmpId } = data;
   if (empId === parseInt(pickupEmpId)) {
@@ -77,7 +53,20 @@ const bookTrip = (data, bookedtrip, trips) => (dispatch) => {
     setTimeout(() => {
       dispatch(tripBookErrorStatus({ showError: false, message: '' }));
     }, 5000);
-  } else if (checkForbookedTrip(data, bookedtrip, trips, dispatch)) {
+  } else if (data.vacantSeat === 0) {
+    dispatch(
+      tripBookErrorStatus({
+        showError: true,
+        message: 'No seat left, try another trip',
+      })
+    );
+  } else if (checkForbookedTrip(data, bookedtrip)) {
+    dispatch(
+      tripBookErrorStatus({
+        showError: true,
+        message: 'You have already book the trip',
+      })
+    );
     setTimeout(() => {
       dispatch(tripBookErrorStatus({ showError: false, message: '' }));
     }, 5000);

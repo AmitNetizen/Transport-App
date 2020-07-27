@@ -59,7 +59,6 @@ class LandingPage extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state, 'state::state');
   return {
     trips: state.trips.tripData,
     bookedtrip: state.trips.bookedtrip,
